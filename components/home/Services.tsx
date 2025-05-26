@@ -340,7 +340,7 @@ export default function Services() {
                   {/* Number */}
                   <div className="lg:col-span-2">
                     <span
-                      className="text-8xl md:text-9xl lg:text-[10rem] font-light text-green-100 group-hover:text-green-200 transition-colors duration-700"
+                      className="text-8xl md:text-9xl lg:text-[10rem] font-light text-green-300 group-hover:text-green-400 transition-colors duration-700"
                       style={{
                         fontWeight: "100",
                         letterSpacing: "-0.08em",
@@ -379,7 +379,7 @@ export default function Services() {
                         {service.subServices.map((subService, subIndex) => (
                           <span
                             key={subIndex}
-                            className="px-6 py-4 bg-green-50 text-green-700 rounded-full text-sm font-medium border border-green-100 hover:bg-green-100 transition-colors duration-300"
+                            className="px-6 py-4 bg-green-100 text-green-700 rounded-full text-sm font-medium border border-green-100 hover:bg-green-00 transition-colors duration-300"
                             style={{
                               fontWeight: "400",
                             }}
@@ -444,7 +444,7 @@ export default function Services() {
       </section>
 
       {/* Second Parallax Section */}
-      <section className="relative py-40 md:py-56 bg-green-50/30 overflow-hidden">
+      <section className="relative py-40 md:py-56 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-8 md:px-16 lg:px-24">
           <div
             ref={parallaxContainer2Ref}

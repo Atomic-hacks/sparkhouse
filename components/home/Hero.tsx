@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import HeroParallax from "@/components/ui/hero-parallax";
+import { VideoParallax } from "../ui/VideoParallax";
+import { useScroll } from "framer-motion";
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -16,6 +17,8 @@ export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [screenHeight, setScreenHeight] = useState(0);
+
+  const { scrollY } = useScroll();
 
   // Detect mobile and screen dimensions
   useEffect(() => {
@@ -138,13 +141,6 @@ export default function Hero() {
     };
   }, [mounted, handleScroll]);
 
-  // Video sources
-  const heroVideos = [
-    { src: "/sky1.mp4", type: "video/mp4" },
-    { src: "/sky4.mp4", type: "video/mp4" },
-    { src: "/sky2.mp4", type: "video/mp4" },
-  ] as const;
-
   if (!mounted) {
     return (
       <main>
@@ -158,7 +154,7 @@ export default function Hero() {
   }
 
   return (
-    <main>
+    <main className="sticky top-0">
       <div
         ref={heroRef}
         className="relative overflow-hidden"
@@ -178,9 +174,17 @@ export default function Hero() {
             transformOrigin: "center center",
           }}
         >
-          <HeroParallax videos={heroVideos}>
-            <div />
-          </HeroParallax>
+          <VideoParallax
+            scrollY={scrollY}
+            mediaItems={[
+              {
+                type: "video",
+                src: "/sky2.mp4",
+                alt: "sky2",
+              },
+            ]}
+            className=" "
+          />
         </div>
 
         {/* Dynamic Overlay - Enhanced for mobile */}

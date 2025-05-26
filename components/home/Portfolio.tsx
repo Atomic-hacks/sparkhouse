@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { VideoParallax } from "../ui/VideoParallax";
+import { useScroll } from "framer-motion";
 
 export default function Portfolio() {
   const videoContainerRef = useRef<HTMLDivElement>(null);
@@ -142,10 +144,12 @@ export default function Portfolio() {
     };
   }, []);
 
+  const { scrollY } = useScroll();
+
   return (
     <>
       {/* Video Parallax Section */}
-      <section className="relative py-16 sm:py-24 md:py-32 lg:py-48 bg-gradient-to-br from-stone-50 via-white to-green-50/30 overflow-hidden">
+      <section className="relative py-16 sm:py-24 md:py-32 lg:py-48 bg-gradient-to-br from-stone-50 via-white to-green-50 overflow-hidden">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
@@ -213,78 +217,22 @@ export default function Portfolio() {
           </div>
 
           {/* Enhanced Parallax Video Container */}
-
-          <section className="relative bg-white overflow-hidden">
-            <div className="max-w-7xl mx-auto">
-              <div
-                ref={videoContainerRef}
-                className="relative w-full aspect-video overflow-hidden"
-                style={{
-                  aspectRatio: "16/9",
-                }}
-              >
-                <video
-                  ref={videoRef}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  style={{
-                    transformOrigin: "center center",
-                  }}
-                >
-                  <source src="/sky5.mp4" type="video/mp4" />
-                </video>
-
-                {/* Refined overlay */}
-                <div className="absolute inset-0 bg-black/30"></div>
-
-                {/* Consultation Content Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white max-w-2xl md:px-8 px-2">
-                    <h3
-                      className="text-2xl md:text-4xl lg:text-5xl font-light mb-6 leading-tight"
-                      style={{
-                        fontWeight: "200",
-                        letterSpacing: "-0.03em",
-                      }}
-                    >
-                      Elegant Interiors, Exceptional Living
-                    </h3>
-
-                    <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto mb-4 md:mb-8"></div>
-
-                    <p
-                      className="text-base md:text-lg lg:text-xl mb-4 md:mb-8 leading-relaxed text-white/80"
-                      style={{
-                        fontWeight: "300",
-                        lineHeight: "1.6",
-                        letterSpacing: "0.005em",
-                      }}
-                    >
-                      Expert craftsmanship and interior design tailored to your
-                      lifestyle.
-                    </p>
-
-                    <button className="group relative px-6 py-2 md:px-10 md:py-4 bg-transparent border border-white/30 text-white font-light text-base md:text-lg hover:border-white transition-all duration-500 overflow-hidden">
-                      <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out origin-left"></div>
-                      <span
-                        className="relative z-10 group-hover:text-green-900 transition-colors duration-700 uppercase tracking-wide"
-                        style={{
-                          fontWeight: "300",
-                          letterSpacing: "0.1em",
-                        }}
-                      >
-                        Get In Touch
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
+      </section>
+      <section className="sticky top-20 overflow-hidden">
+        <VideoParallax
+          scrollY={scrollY}
+          title="Your Title"
+          description="Your description"
+          mediaItems={[
+            {
+              type: "video",
+              src: "/sky5.mp4",
+              alt: "sky5",
+            },
+          ]}
+          className=" "
+        />
       </section>
 
       {/* Enhanced Portfolio Projects Section */}
