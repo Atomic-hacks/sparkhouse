@@ -82,7 +82,7 @@ export default function Navbar() {
           isVisible ? "translate-y-0" : "-translate-y-full"
         } ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-xl shadow-2xl shadow-black/5"
+            ? "bg-black/5  backdrop-blur-xl shadow-2xl shadow-black/5"
             : "bg-transparent"
         }`}
       >
@@ -94,16 +94,11 @@ export default function Navbar() {
                 href="/"
                 className="group flex items-center space-x-2 sm:space-x-3"
               >
-                <div className="relative">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-14 lg:h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl sm:rounded-2xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-700 flex items-center justify-center shadow-2xl shadow-emerald-500/25">
-                    <div className="w-3 h-3 sm:w-4 sm:h-4 lg:w-7 lg:h-7 bg-white rounded-md lg:rounded-lg transform rotate-45 group-hover:rotate-0 transition-transform duration-700"></div>
-                  </div>
-                  <div className="absolute inset-0 bg-emerald-400 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-20 blur-2xl transition-all duration-700"></div>
-                </div>
+                <img src="/logo.jpg" alt="logo" className="w-10 h-10" />
                 <div className="flex flex-col">
                   <span
                     className={`text-sm sm:text-lg lg:text-2xl font-bold tracking-tight transition-colors duration-500 ${
-                      isScrolled ? "text-gray-900" : "text-white"
+                      isScrolled ? "text-green-700" : "text-white"
                     }`}
                   >
                     Spark House
@@ -122,11 +117,11 @@ export default function Navbar() {
             {/* Compact Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`group relative overflow-hidden px-3 py-2 sm:px-4 sm:py-3 lg:px-8 lg:py-4 rounded-full transition-all duration-700 ease-out ${
+              className={`group relative overflow-hidden px-3 py-2 sm:px-4 sm:py-3 lg:px-8 lg:py-4 rounded-full transition-all duration-700 ease-in-out ${
                 isMenuOpen
                   ? "bg-emerald-500 shadow-2xl shadow-emerald-500/30 scale-105"
                   : isScrolled
-                  ? "bg-white hover:bg-gray-50 shadow-xl shadow-black/10 border border-gray-100"
+                  ? "bg-transparent border-none"
                   : "bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20"
               }`}
             >
@@ -137,7 +132,7 @@ export default function Navbar() {
                       isMenuOpen
                         ? "bg-white rotate-45 translate-y-1.5"
                         : isScrolled
-                        ? "bg-gray-700"
+                        ? "bg-white"
                         : "bg-white"
                     }`}
                   ></div>
@@ -146,7 +141,7 @@ export default function Navbar() {
                       isMenuOpen
                         ? "bg-white opacity-0"
                         : isScrolled
-                        ? "bg-gray-700 opacity-100"
+                        ? "bg-white opacity-100"
                         : "bg-white opacity-100"
                     }`}
                   ></div>
@@ -155,17 +150,17 @@ export default function Navbar() {
                       isMenuOpen
                         ? "bg-white -rotate-45 -translate-y-1.5"
                         : isScrolled
-                        ? "bg-gray-700"
+                        ? "bg-white"
                         : "bg-white"
                     }`}
                   ></div>
                 </div>
                 <span
-                  className={`text-xs sm:text-sm font-medium tracking-wide transition-all duration-500 ${
+                  className={`text-sm sm:text-xl font-medium tracking-wide transition-all duration-500 ${
                     isMenuOpen
                       ? "text-white"
                       : isScrolled
-                      ? "text-gray-700"
+                      ? "text-white"
                       : "text-white"
                   }`}
                 >
@@ -185,7 +180,7 @@ export default function Navbar() {
       >
         {/* Glassmorphism Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/90 via-green-900/85 to-emerald-950/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/60 via-green-900/30 to-emerald-950/65"></div>
           <div className="absolute inset-0 backdrop-blur-2xl"></div>
           <div className="absolute inset-0 bg-gradient-to-tr from-emerald-800/10 via-transparent to-green-700/15"></div>
         </div>

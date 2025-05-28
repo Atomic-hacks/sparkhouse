@@ -145,9 +145,7 @@ export default function Footer() {
               >
                 {/* Logo */}
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                    <div className="w-8 h-8 bg-emerald-500 rounded-md transform rotate-45"></div>
-                  </div>
+                  <img src="/logo.jpg" alt="logo" className="w-14 md:w-20" />
                   <span
                     className="text-2xl font-bold text-white"
                     style={{
