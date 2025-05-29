@@ -201,7 +201,7 @@ export default function About() {
               <div className="relative">
                 <div className="relative overflow-hidden">
                   <img
-                    src="/api/placeholder/600/400"
+                    src="/house10.jpg"
                     alt="Architectural Excellence - SparkHouse Limited"
                     className="w-full h-auto shadow-2xl transition-transform duration-700 hover:scale-105"
                     style={{
