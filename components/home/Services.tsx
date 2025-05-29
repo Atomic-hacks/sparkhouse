@@ -1,149 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Award, Users, Target, Settings } from "lucide-react";
 
 export default function Services() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const servicesListRef = useRef<HTMLDivElement>(null);
-  const parallaxContainer1Ref = useRef<HTMLDivElement>(null);
-  const parallaxContainer2Ref = useRef<HTMLDivElement>(null);
-  const processRef = useRef<HTMLDivElement>(null);
-  const [isHeroVisible, setIsHeroVisible] = useState(false);
-  const [isServicesVisible, setIsServicesVisible] = useState(false);
-  const [isProcessVisible, setIsProcessVisible] = useState(false);
+  const [activeSection, setActiveSection] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const heroObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsHeroVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    const servicesObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsServicesVisible(true);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    const processObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsProcessVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (heroRef.current) heroObserver.observe(heroRef.current);
-    if (servicesListRef.current)
-      servicesObserver.observe(servicesListRef.current);
-    if (processRef.current) processObserver.observe(processRef.current);
-
-    return () => {
-      heroObserver.disconnect();
-      servicesObserver.disconnect();
-      processObserver.disconnect();
-    };
-  }, []);
-
-  // Continuous parallax effect for multiple sections
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      const viewportHeight = window.innerHeight;
-
-      // First parallax section
-      if (parallaxContainer1Ref.current) {
-        const rect1 = parallaxContainer1Ref.current.getBoundingClientRect();
-        const elementTop1 = rect1.top + scrolled;
-        const elementHeight1 = rect1.height;
-
-        // Extended range for continuous effect
-        const startPoint1 = elementTop1 - viewportHeight * 1.5;
-        const endPoint1 = elementTop1 + elementHeight1 + viewportHeight;
-
-        if (scrolled >= startPoint1 && scrolled <= endPoint1) {
-          const progress1 =
-            (scrolled - startPoint1) / (endPoint1 - startPoint1);
-          const easeInOutCubic = (t: number) =>
-            t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-          const easedProgress1 = easeInOutCubic(
-            Math.max(0, Math.min(1, progress1))
-          );
-
-          // Continuous movement throughout scroll
-          const translateY1 = (easedProgress1 - 0.5) * -120;
-          const scale1 = 0.92 + Math.sin(easedProgress1 * Math.PI) * 0.15;
-          const opacity1 = 0.4 + Math.sin(easedProgress1 * Math.PI) * 0.6;
-
-          parallaxContainer1Ref.current.style.transform = `translateY(${translateY1}px) scale(${scale1})`;
-          parallaxContainer1Ref.current.style.opacity = opacity1.toString();
-
-          // Layer children with different speeds
-          const children1 = parallaxContainer1Ref.current.children;
-          Array.from(children1).forEach((child, index) => {
-            const childOffset =
-              translateY1 +
-              Math.sin((easedProgress1 + index * 0.2) * Math.PI) * 30;
-            const childRotate = Math.sin(easedProgress1 * Math.PI * 2) * 2;
-            (
-              child as HTMLElement
-            ).style.transform = `translateY(${childOffset}px) rotate(${childRotate}deg)`;
-          });
-        }
-      }
-
-      // Second parallax section with different behavior
-      if (parallaxContainer2Ref.current) {
-        const rect2 = parallaxContainer2Ref.current.getBoundingClientRect();
-        const elementTop2 = rect2.top + scrolled;
-        const elementHeight2 = rect2.height;
-
-        const startPoint2 = elementTop2 - viewportHeight * 1.2;
-        const endPoint2 = elementTop2 + elementHeight2 + viewportHeight * 0.8;
-
-        if (scrolled >= startPoint2 && scrolled <= endPoint2) {
-          const progress2 =
-            (scrolled - startPoint2) / (endPoint2 - startPoint2);
-          const easeOutExpo = (t: number) =>
-            t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-          const easedProgress2 = easeOutExpo(
-            Math.max(0, Math.min(1, progress2))
-          );
-
-          // Different movement pattern
-          const translateY2 = Math.sin(easedProgress2 * Math.PI * 1.5) * -80;
-          const scale2 = 0.96 + easedProgress2 * 0.08;
-          const skew = Math.sin(easedProgress2 * Math.PI) * 1.5;
-
-          parallaxContainer2Ref.current.style.transform = `translateY(${translateY2}px) scale(${scale2}) skewY(${skew}deg)`;
-          parallaxContainer2Ref.current.style.opacity = (
-            0.3 +
-            easedProgress2 * 0.7
-          ).toString();
-        }
-      }
-    };
-
-    let rafId: number;
-    const throttledHandler = () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(handleScroll);
-    };
-
-    window.addEventListener("scroll", throttledHandler, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", throttledHandler);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
+    const timer = setTimeout(() => setActiveSection(true), 200);
+    return () => clearTimeout(timer);
   }, []);
 
   const services = [
@@ -157,6 +23,8 @@ export default function Services() {
         "Landscape Remodeling",
         "Project Management",
       ],
+      icon: Settings,
+      gradient: "from-green-600 via-green-500 to-teal-400",
     },
     {
       title: "Consulting Services",
@@ -170,6 +38,8 @@ export default function Services() {
         "Real Estate Development/Management",
         "Training Services",
       ],
+      icon: Target,
+      gradient: "from-green-600 via-green-500 to-cyan-400",
     },
     {
       title: "Project Documentary",
@@ -177,6 +47,8 @@ export default function Services() {
         "Comprehensive documentation and showcase services including our signature 'Flip My Crib' program.",
       number: "03",
       subServices: ["Flip My Crib"],
+      icon: Award,
+      gradient: "from-teal-600 via-green-500 to-green-400",
     },
     {
       title: "Building Construction Services",
@@ -184,6 +56,8 @@ export default function Services() {
         "Full-scale construction solutions with dedicated project management and contracting expertise.",
       number: "04",
       subServices: ["Project Management", "Project Contracting"],
+      icon: Users,
+      gradient: "from-green-600 via-green-800 to-green-600",
     },
   ];
 
@@ -207,349 +81,353 @@ export default function Services() {
   ];
 
   return (
-    <>
+    <div className="relative min-h-screen bg-white">
+      {/* Dynamic Aurora Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="absolute w-full h-full opacity-30"
+          style={{
+            background: `
+              radial-gradient(ellipse 80% 50% at 20% 40%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse 60% 80% at 80% 20%, rgba(5, 150, 105, 0.1) 0%, transparent 50%),
+              radial-gradient(ellipse 100% 70% at 40% 80%, rgba(6, 95, 70, 0.1) 0%, transparent 50%)
+            `,
+            animation: "aurora 20s ease-in-out infinite alternate",
+          }}
+        />
+      </div>
+
+      {/* Floating Geometric Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute opacity-5"
+            style={{
+              left: `${15 + i * 12}%`,
+              top: `${20 + i * 10}%`,
+              transform: `rotate(${i * 45}deg)`,
+              animation: `float ${6 + (i % 3)}s ease-in-out infinite ${
+                i * 0.8
+              }s`,
+            }}
+          >
+            <div
+              className="w-20 h-20 border border-green-400/30 transform-gpu"
+              style={{
+                clipPath:
+                  i % 2 === 0
+                    ? "polygon(50% 0%, 0% 100%, 100% 100%)"
+                    : "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+              }}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Particle System */}
+      <div className="absolute inset-0">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-gradient-to-r from-green-400 to-teal-300 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `sparkle ${2 + Math.random() * 3}s linear infinite ${
+                Math.random() * 2
+              }s`,
+              opacity: 0.4 + Math.random() * 0.4,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Hero Section */}
       <section
-        ref={heroRef}
-        className="relative min-h-screen bg-white flex items-center justify-center py-20 px-8 md:px-16 lg:px-24"
+        ref={sectionRef}
+        className="relative py-24 md:py-32 lg:py-40 overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="text-center space-y-12">
-            <div
-              className={`transition-all duration-1500 ${
-                isHeroVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-16"
-              }`}
-            >
-              <h1
-                className="text-7xl md:text-9xl lg:text-[12rem] font-light text-black leading-none mb-12"
-                style={{
-                  fontWeight: "100",
-                  letterSpacing: "-0.06em",
-                }}
-              >
-                Our Services
-              </h1>
-            </div>
-
-            <div
-              className={`transition-all duration-1500 delay-400 ${
-                isHeroVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-16"
-              }`}
-            >
-              <div className="w-48 h-px bg-gradient-to-r from-transparent via-green-600/40 to-transparent mx-auto mb-12"></div>
-              <p
-                className="text-xl md:text-3xl lg:text-4xl text-black/70 max-w-5xl mx-auto leading-relaxed"
-                style={{
-                  fontWeight: "200",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1.3",
-                }}
-              >
-                Our mission is simple: to ignite the spark of inspiration
-                <br />
-                and functionality in every project we undertake, leading the way
-                <br />
-                and reshaping the narrative of architectural brilliance.
-              </p>
-            </div>
-
-            <div
-              className={`pt-20 transition-all duration-1500 delay-800 ${
-                isHeroVisible
-                  ? "opacity-100 translate-y-0 rotate-0"
-                  : "opacity-0 translate-y-16 rotate-12"
-              }`}
-            >
-              <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto relative overflow-hidden group">
-                <div className="absolute inset-0 bg-white scale-0 group-hover:scale-100 transition-transform duration-700 ease-out rounded-full"></div>
-                <div className="w-6 h-6 bg-white group-hover:bg-green-600 rounded-full relative z-10 transition-colors duration-700"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* First Parallax Section */}
-      <section className="relative py-40 md:py-56 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-16">
           <div
-            ref={parallaxContainer1Ref}
-            className="text-center space-y-20"
-            style={{ transformOrigin: "center center" }}
+            className={`mb-20 md:mb-32 transform transition-all duration-2000 ease-out ${
+              activeSection
+                ? "translate-y-0 opacity-100"
+                : "translate-y-16 opacity-0"
+            }`}
           >
-            <div className="space-y-12">
-              <h2
-                className="text-6xl md:text-8xl lg:text-9xl font-light text-black leading-none"
-                style={{
-                  fontWeight: "100",
-                  letterSpacing: "-0.04em",
-                }}
-              >
-                Philosophy
-              </h2>
-            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-end">
+              <div className="space-y-8">
+                {/* Decorative accent */}
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-px bg-gradient-to-r from-green-600 to-green-700"></div>
+                  <span className="text-sm font-medium text-green-700 tracking-[0.15em] uppercase">
+                    Service Excellence
+                  </span>
+                </div>
 
-            <div className="max-w-4xl mx-auto">
-              <p
-                className="text-xl md:text-2xl lg:text-3xl text-black/60 leading-relaxed"
-                style={{
-                  fontWeight: "300",
-                  lineHeight: "1.5",
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                Every project begins with understanding the essence of space and
-                the souls who inhabit it. Architecture should transcend the
-                temporal, creating environments that resonate across
-                generations.
-              </p>
-            </div>
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-thin leading-[0.9] tracking-tight">
+                  <span className="inline-block bg-gradient-to-r from-green-600 via-green-700 to-green-600 bg-clip-text text-transparent">
+                    Our Services
+                  </span>
+                  <br />
+                  <span className="inline-block text-gray-600 font-light">
+                    inspire
+                  </span>
+                  <br />
+                  <span className="inline-block bg-gradient-to-r from-green-600 via-green-800 to-green-600 bg-clip-text text-transparent font-light">
+                    excellence
+                  </span>
+                </h1>
 
-            <div className="flex justify-center pt-8">
-              <div className="w-32 h-32 bg-green-50 rounded-full flex items-center justify-center relative overflow-hidden group">
-                <div className="absolute inset-0 bg-green-600 scale-0 group-hover:scale-100 transition-transform duration-1000 ease-out rounded-full"></div>
-                <div className="w-12 h-12 bg-green-600 group-hover:bg-white rounded-full relative z-10 transition-colors duration-1000"></div>
+                <div className="w-32 h-0.5 bg-gradient-to-r from-green-700 via-green-600 to-green-700" />
+              </div>
+
+              <div className="space-y-8">
+                <p className="text-lg md:text-xl text-gray-900 font-light leading-relaxed">
+                  Our mission is simple: to ignite the spark of inspiration and
+                  functionality in every project we undertake, leading the way
+                  and reshaping the narrative of architectural brilliance.
+                </p>
+
+                {/* Stats */}
+                <div className="flex items-center space-x-8 pt-4">
+                  <div className="flex items-center space-x-3">
+                    <Award className="w-5 h-5 text-green-600" />
+                    <div>
+                      <div className="text-2xl font-light text-green-700">
+                        4
+                      </div>
+                      <div className="text-sm text-gray-500 uppercase tracking-wide">
+                        Services
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-px h-12 bg-gray-200"></div>
+                  <div className="flex items-center space-x-3">
+                    <Users className="w-5 h-5 text-green-600" />
+                    <div>
+                      <div className="text-2xl font-light text-green-700">
+                        100+
+                      </div>
+                      <div className="text-sm text-gray-500 uppercase tracking-wide">
+                        Projects
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services List Section */}
-      <section
-        ref={servicesListRef}
-        className="relative py-24 md:py-40 bg-white"
-      >
-        <div className="max-w-8xl mx-auto px-8 md:px-16 lg:px-24">
-          <div className="space-y-20 md:space-y-32">
-            {services.map((service, index) => (
-              <div
-                key={service.number}
-                className={`transition-all duration-1200 ${
-                  isServicesVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-20"
-                }`}
-                style={{ transitionDelay: `${index * 250}ms` }}
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start group">
-                  {/* Number */}
-                  <div className="lg:col-span-2">
-                    <span
-                      className="text-8xl md:text-9xl lg:text-[10rem] font-light text-green-300 group-hover:text-green-400 transition-colors duration-700"
-                      style={{
-                        fontWeight: "100",
-                        letterSpacing: "-0.08em",
-                      }}
-                    >
-                      {service.number}
-                    </span>
-                  </div>
+      {/* Philosophy Section */}
+      <section className="relative py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-16">
+          <div className="relative overflow-hidden bg-black/50 backdrop-blur-sm border border-green-500/20">
+            <div className="aspect-video relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-600/60 via-green-700/40 to-green-800/60"></div>
 
-                  {/* Title & Content */}
-                  <div className="lg:col-span-9 space-y-6">
-                    <h3
-                      className="text-4xl md:text-5xl lg:text-6xl font-light text-black leading-tight group-hover:translate-x-2 transition-transform duration-500"
-                      style={{
-                        fontWeight: "200",
-                        letterSpacing: "-0.03em",
-                      }}
-                    >
-                      {service.title}
-                    </h3>
+              {/* Center Content */}
+              <div className="absolute inset-0 flex items-center justify-center text-center text-white p-8">
+                <div className="max-w-4xl space-y-8">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
+                    Philosophy
+                  </h2>
+                  <p className="text-lg md:text-xl font-light leading-relaxed opacity-90">
+                    Every project begins with understanding the essence of space
+                    and the souls who inhabit it. Architecture should transcend
+                    the temporal, creating environments that resonate across
+                    generations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                    <p
-                      className="text-lg md:text-xl text-black/60 leading-relaxed group-hover:text-black/80 transition-colors duration-500 max-w-4xl"
-                      style={{
-                        fontWeight: "300",
-                        lineHeight: "1.6",
-                        letterSpacing: "0.005em",
-                      }}
-                    >
-                      {service.description}
-                    </p>
+      {/* Services Section */}
+      <section className="relative py-24 md:py-32">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-16">
+          {/* Section Header */}
+          <div className="mb-20 md:mb-32">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div className="flex items-center space-x-6">
+                <div className="w-8 h-8 relative">
+                  <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-green-600 to-green-700 transform -translate-y-1/2"></div>
+                  <div className="absolute left-1/2 top-0 w-px h-full bg-gradient-to-b from-green-600 to-green-700 transform -translate-x-1/2"></div>
+                  <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-green-600 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+                </div>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 tracking-tight">
+                  What We Offer
+                </h2>
+              </div>
+              <div className="text-right space-y-2">
+                <span className="text-xl md:text-2xl text-gray-400 font-light">
+                  / {services.length}
+                </span>
+                <p className="text-sm text-green-600 font-medium tracking-wide uppercase">
+                  Services
+                </p>
+              </div>
+            </div>
+          </div>
 
-                    {/* Sub-services */}
-                    <div className="pt-4">
-                      <div className="flex flex-wrap gap-3">
-                        {service.subServices.map((subService, subIndex) => (
-                          <span
-                            key={subIndex}
-                            className="px-6 py-4 bg-green-100 text-green-700 rounded-full text-sm font-medium border border-green-100 hover:bg-green-00 transition-colors duration-300"
-                            style={{
-                              fontWeight: "400",
-                            }}
-                          >
-                            {subService}
-                          </span>
-                        ))}
+          {/* Services List */}
+          <div className="space-y-16 md:space-y-24">
+            {services.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
+                <div
+                  key={service.number}
+                  className="group"
+                  style={{
+                    animationDelay: `${index * 200}ms`,
+                    animation: activeSection
+                      ? "fadeInUp 1s ease-out forwards"
+                      : "none",
+                  }}
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                    {/* Number & Icon */}
+                    <div className="lg:col-span-2 flex items-center space-x-4">
+                      <span className="text-6xl md:text-7xl lg:text-8xl font-light text-green-300 group-hover:text-green-400 transition-colors duration-700">
+                        {service.number}
+                      </span>
+                      <div
+                        className={`w-12 h-12 rounded-full bg-gradient-to-r ${service.gradient} flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity duration-500`}
+                      >
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="lg:col-span-9 space-y-6">
+                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 leading-tight group-hover:text-green-700 transition-colors duration-500">
+                        {service.title}
+                      </h3>
+
+                      <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light max-w-4xl">
+                        {service.description}
+                      </p>
+
+                      {/* Sub-services */}
+                      <div className="pt-4">
+                        <div className="flex flex-wrap gap-3">
+                          {service.subServices.map((subService, subIndex) => (
+                            <span
+                              key={subIndex}
+                              className="px-4 py-2 bg-green-100/80 text-green-700 rounded-full text-sm font-medium border border-green-100 hover:bg-green-100 hover:border-green-200 transition-colors duration-300"
+                            >
+                              {subService}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="lg:col-span-1 flex justify-center lg:justify-end">
+                      <div className="w-12 h-12 flex items-center justify-center group-hover:bg-green-600 transition-all duration-500 cursor-pointer relative overflow-hidden rounded-full border border-green-200 group-hover:border-green-600">
+                        <ArrowUpRight className="w-5 h-5 text-green-600 group-hover:text-white transition-colors duration-500" />
                       </div>
                     </div>
                   </div>
 
-                  {/* Dynamic Arrow */}
-                  <div className="lg:col-span-1 flex justify-center lg:justify-end">
-                    <div className="w-16 h-16 flex items-center justify-center  group/arrow transition-all duration-500 cursor-pointer relative overflow-hidden">
-                      {/* Default Arrow (top-right) */}
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="absolute group-hover/arrow:opacity-0 group-hover/arrow:rotate-45 group-hover/arrow:scale-75 transition-all duration-500 stroke-green-600 group-hover/arrow:stroke-white"
-                      >
-                        <path
-                          d="M7 17L17 7M17 7H7M17 7V17"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-
-                      {/* Hover Arrow (bottom-left) */}
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="absolute opacity-0 -rotate-45 scale-75 group-hover/arrow:opacity-100 group-hover/arrow:rotate-0 group-hover/arrow:scale-100 transition-all duration-500 stroke-white"
-                      >
-                        <path
-                          d="M17 7L7 17M7 17H17M7 17V7"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                  {/* Divider */}
+                  {index < services.length - 1 && (
+                    <div className="mt-16 md:mt-24">
+                      <div className="w-full h-px bg-gradient-to-r from-transparent via-green-200/60 to-transparent"></div>
                     </div>
-                  </div>
+                  )}
                 </div>
-
-                {/* Enhanced Divider */}
-                {index < services.length - 1 && (
-                  <div className="mt-20 md:mt-32">
-                    <div className="w-full h-px bg-gradient-to-r from-transparent via-green-200/60 to-transparent"></div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Second Parallax Section */}
-      <section className="relative py-40 md:py-56 bg-white overflow-hidden">
-        <div className="max-w-6xl mx-auto px-8 md:px-16 lg:px-24">
-          <div
-            ref={parallaxContainer2Ref}
-            className="text-center space-y-16"
-            style={{ transformOrigin: "center center" }}
-          >
-            <h2
-              className="text-5xl md:text-7xl lg:text-8xl font-light text-black/80 leading-tight"
-              style={{
-                fontWeight: "200",
-                letterSpacing: "-0.03em",
-              }}
-            >
-              Crafting spaces that
-              <br />
-              inspire and endure
-            </h2>
-
-            <div className="max-w-3xl mx-auto">
-              <p
-                className="text-lg md:text-xl text-black/50 leading-relaxed"
-                style={{
-                  fontWeight: "300",
-                  lineHeight: "1.7",
-                }}
-              >
-                Through meticulous attention to detail and an unwavering
-                commitment to excellence, we create architectural narratives
-                that speak to the human experience.
-              </p>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Process Section */}
-      <section
-        ref={processRef}
-        className="relative py-24 md:py-40 bg-green-900 text-white"
-      >
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-start">
-            {/* Left Side - Title */}
-            <div
-              className={`transition-all duration-1200 ${
-                isProcessVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-16"
-              }`}
-            >
-              <h2
-                className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-12"
-                style={{
-                  fontWeight: "200",
-                  letterSpacing: "-0.03em",
-                }}
-              >
-                Our
-                <br />
-                Process
-              </h2>
-              <div className="w-24 h-px bg-gradient-to-r from-green-400/60 to-transparent"></div>
-            </div>
-
-            {/* Right Side - Process Steps */}
-            <div className="space-y-16">
-              {processSteps.map((step, index) => (
+      <section className="relative py-24 md:py-32 bg-gradient-to-br from-green-50/50 to-white overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="grid grid-cols-8 md:grid-cols-12 gap-8">
+              {Array.from({ length: 48 }).map((_, i) => (
                 <div
-                  key={step.phase}
-                  className={`transition-all duration-1200 group ${
-                    isProcessVisible
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-16"
-                  }`}
-                  style={{ transitionDelay: `${300 + index * 200}ms` }}
-                >
-                  <div className="space-y-6">
-                    <div className="flex items-center space-x-8">
-                      <div className="w-3 h-3 bg-green-400 rounded-full group-hover:bg-white group-hover:scale-150 transition-all duration-500"></div>
-                      <h3
-                        className="text-3xl md:text-4xl font-light group-hover:translate-x-2 transition-transform duration-500"
-                        style={{
-                          fontWeight: "200",
-                          letterSpacing: "-0.02em",
-                        }}
-                      >
-                        {step.phase}
-                      </h3>
-                    </div>
-                    <p
-                      className="text-lg md:text-xl text-white/60 leading-relaxed ml-11 group-hover:text-white/80 transition-colors duration-500"
-                      style={{
-                        fontWeight: "300",
-                        lineHeight: "1.6",
-                      }}
-                    >
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
+                  key={i}
+                  className="w-1 h-1 bg-green-600 rounded-full"
+                  style={{
+                    animationDelay: `${i * 0.2}s`,
+                    animation: "float 4s ease-in-out infinite",
+                  }}
+                />
               ))}
             </div>
           </div>
         </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-16">
+          {/* Section Header */}
+          <div className="mb-20 md:mb-24">
+            <div className="flex items-center space-x-6 mb-8">
+              <div className="w-8 h-8 relative">
+                <div className="absolute top-1/2 left-0 w-full h-px bg-green-600 transform -translate-y-1/2"></div>
+                <div className="absolute left-1/2 top-0 w-px h-full bg-green-600 transform -translate-x-1/2"></div>
+              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900">
+                Our Process
+              </h2>
+            </div>
+            <div className="max-w-2xl">
+              <p className="text-lg md:text-xl text-gray-900 font-light leading-relaxed">
+                Crafting spaces that inspire and endure through meticulous
+                attention to detail and unwavering commitment to excellence.
+              </p>
+            </div>
+          </div>
+
+          {/* Process Steps Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            {processSteps.map((step, index) => (
+              <div
+                key={step.phase}
+                className={`group ${
+                  index === 1 || index === 2 ? "md:translate-y-8" : ""
+                }`}
+              >
+                <div className="bg-white/80 backdrop-blur-sm rounded-xs p-8 md:p-10 shadow-sm border border-green-100/50 hover:shadow-xl hover:border-green-200/50 transition-all duration-500 hover:-translate-y-2">
+                  <div className="flex items-center space-x-4 mb-6">
+                    <div className="w-3 h-3 bg-green-600 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <span className="text-sm text-green-600 font-medium tracking-wide uppercase">
+                      Step {index + 1}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-light text-gray-900 mb-4 group-hover:text-green-700 transition-colors duration-500">
+                    {step.phase}
+                  </h3>
+                  <p className="text-base md:text-lg text-gray-700 leading-relaxed font-light">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Call to Action */}
+          <div className="mt-20 md:mt-24 text-center">
+            <button className="group relative px-8 py-4 bg-transparent border border-green-600/30 text-green-600 font-light text-lg hover:border-green-600 transition-all duration-500 overflow-hidden">
+              <div className="absolute inset-0 bg-green-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out origin-left"></div>
+              <span className="relative z-10 group-hover:text-white transition-colors duration-700 flex items-center space-x-3">
+                <span>Start Your Project Today</span>
+                <ArrowUpRight className="w-5 h-5" />
+              </span>
+            </button>
+          </div>
+        </div>
       </section>
-    </>
+    </div>
   );
 }
