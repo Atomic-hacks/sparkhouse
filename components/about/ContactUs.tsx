@@ -34,7 +34,7 @@ const Contact = () => {
               </h1>
 
               <p className="text-lg text-green-800 leading-relaxed max-w-lg">
-                Discover unparalleled service with sparkjouse Limited. Our
+                Discover unparalleled service with SparkHouse Limited. Our
                 expert team delivers tailored solutions that transform your
                 vision into reality.
               </p>

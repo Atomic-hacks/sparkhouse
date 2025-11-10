@@ -65,7 +65,7 @@ export default function Navbar() {
                       isScrolled ? "text-green-700" : "text-white"
                     }`}
                   >
-                    sparkjouse
+                    SparkHouse
                   </span>
                   <span
                     className={`text-sm font-light tracking-wider transition-colors duration-500 ${
@@ -223,7 +223,7 @@ export default function Navbar() {
 
                 <div className="space-y-2">
                   <p className="text-white/90 font-light text-sm">
-                    info@sparkhouselimited.ng
+                    info@SparkHouselimited.ng
                   </p>
                   <p className="text-white/90 font-light text-sm">
                     08088035933

@@ -137,7 +137,7 @@ export default function About() {
                     letterSpacing: "0.005em",
                   }}
                 >
-                  Established over a decade ago, Sparkhouse Designs &
+                  Established over a decade ago, SparkHouse Designs &
                   Construction has been a cornerstone of innovative
                   architectural solutions.
                 </p>

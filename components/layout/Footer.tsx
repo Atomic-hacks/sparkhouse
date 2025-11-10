@@ -155,11 +155,11 @@ export default function Footer() {
               <div className="flex items-center space-x-4 mb-6">
                 <img
                   src="/logo.jpg"
-                  alt="sparkjouse Limited"
+                  alt="SparkHouse Limited"
                   className="w-12 h-12 rounded-lg"
                 />
                 <h3 className="text-2xl font-light bg-gradient-to-r from-green-700 via-green-800 to-green-700 bg-clip-text text-transparent">
-                  sparkjouse Limited
+                  SparkHouse Limited
                 </h3>
               </div>
 
@@ -338,10 +338,10 @@ export default function Footer() {
                   <Mail className="w-4 h-4 text-white" />
                 </div>
                 <a
-                  href="mailto:info@sparkhouselimited.ng"
+                  href="mailto:info@SparkHouselimited.ng"
                   className="text-gray-900 hover:text-green-600 transition-colors duration-300 font-light"
                 >
-                  info@sparkhouselimited.ng
+                  info@SparkHouselimited.ng
                 </a>
               </div>
             </div>
@@ -381,7 +381,7 @@ export default function Footer() {
 
             <div className="text-center">
               <p className="text-sm text-gray-600 font-light">
-                Copyright © 2025 sparkjouse Limited. All rights reserved.
+                Copyright © 2025 SparkHouse Limited. All rights reserved.
               </p>
             </div>
 

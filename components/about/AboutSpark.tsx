@@ -16,7 +16,7 @@ interface OurStoryProps {
 const OurStory: React.FC<OurStoryProps> = ({
   title = "Our Story",
   subtitle = "What Sets Us Apart",
-  description = "Welcome to sparkjouse Limited, where innovation meets excellence in construction and project management. Founded with a vision to redefine the industry standards, we are a dynamic firm dedicated to delivering exceptional results for our clients. With a focus on quality, efficiency, and client satisfaction, we have established ourselves as a trusted partner in the construction and project management sector.",
+  description = "Welcome to SparkHouse Limited, where innovation meets excellence in construction and project management. Founded with a vision to redefine the industry standards, we are a dynamic firm dedicated to delivering exceptional results for our clients. With a focus on quality, efficiency, and client satisfaction, we have established ourselves as a trusted partner in the construction and project management sector.",
   image = "/house1.jpg",
   features = [
     { title: "Expertise" },

@@ -40,7 +40,7 @@ export default function VisionSection(): JSX.Element {
       title: "Our Vision",
       subtitle: "Industry Leadership",
       description:
-        "At sparkjouse Limited, our vision is to be a leader in the construction and project management industry, known for our innovative solutions, unwavering commitment to quality, and superior client service.",
+        "At SparkHouse Limited, our vision is to be a leader in the construction and project management industry, known for our innovative solutions, unwavering commitment to quality, and superior client service.",
       detail:
         "We strive to exceed expectations, setting new benchmarks for excellence in every project we undertake.",
       image: "/innov1.jpg",

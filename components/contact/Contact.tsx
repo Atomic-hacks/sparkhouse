@@ -365,7 +365,7 @@ const ContactPage = () => {
                       Our Email
                     </h3>
                     <p className="text-lg text-gray-700 font-light">
-                      info@sparkhouselimited.ng
+                      info@SparkHouselimited.ng
                     </p>
                   </div>
                 </div>

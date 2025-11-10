@@ -9,7 +9,7 @@ const page = () => {
         <ArchitectureHero
           descriptionHeader="Let’s Build Something Remarkable Together"
           title="Contact Us"
-          description="Have a vision in mind or simply want to learn more about what we do? We're here to listen, collaborate, and create. Reach out to sparkjouse to start a conversation — whether it's a new project, a partnership, or a simple inquiry, we’re ready when you are."
+          description="Have a vision in mind or simply want to learn more about what we do? We're here to listen, collaborate, and create. Reach out to SparkHouse to start a conversation — whether it's a new project, a partnership, or a simple inquiry, we’re ready when you are."
           backgroundImage="/house9.jpg"
           titleId="hero-title"
           descriptionId="hero-description"

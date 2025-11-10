@@ -9,7 +9,7 @@ const page = () => {
         <ArchitectureHero
           descriptionHeader="Our work Speaks for itself"
           title="Projects"
-          description="At sparkjouse, we bring visionary ideas to life through innovative design, precision craftsmanship, and a commitment to excellence. Explore a curated selection of our past and ongoing projects — each one a reflection of our passion for quality, functionality, and timeless architectural impact."
+          description="At SparkHouse, we bring visionary ideas to life through innovative design, precision craftsmanship, and a commitment to excellence. Explore a curated selection of our past and ongoing projects — each one a reflection of our passion for quality, functionality, and timeless architectural impact."
           backgroundImage="/house8.jpg"
           titleId="hero-title"
           descriptionId="hero-description"
