@@ -65,7 +65,7 @@ export default function Navbar() {
                       isScrolled ? "text-green-700" : "text-white"
                     }`}
                   >
-                    Spark House
+                    sparkjouse
                   </span>
                   <span
                     className={`text-sm font-light tracking-wider transition-colors duration-500 ${

@@ -139,18 +139,16 @@ const MeetTheTeam: React.FC = () => {
           <div className="sticky top-16 inset-0 flex items-start justify-center pointer-events-none z-0 pt-8">
             <div className="text-center">
               <h1
-                className="font-black text-white leading-none tracking-tighter"
+                className="font-black text-white leading-none tracking-tighter text-3xl md:text-5xl"
                 style={{
-                  fontSize: "clamp(2.5rem, 12vw, 4rem)",
                   WebkitTextStroke: "1px rgba(255,255,255,0.1)",
                 }}
               >
                 MEET
               </h1>
               <h1
-                className="font-black text-white leading-none tracking-tighter -mt-2"
+                className="font-black text-white leading-none tracking-tighter -mt-2 text-3xl md:text-5xl"
                 style={{
-                  fontSize: "clamp(2.5rem, 12vw, 4rem)",
                   WebkitTextStroke: "1px rgba(255,255,255,0.1)",
                 }}
               >
