@@ -20,7 +20,11 @@ export default function About() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white">
+    <div
+      className="relative min-h-screen border-t border-emerald-100/40 bg-white"
+      data-nav-section="about"
+      id="about"
+    >
       {/* Dynamic Aurora Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div

@@ -6,9 +6,9 @@ import {
   Phone,
   Mail,
   Facebook,
-  Twitter,
   Linkedin,
   Instagram,
+  Clock,
 } from "lucide-react";
 
 export default function Footer() {
@@ -31,6 +31,24 @@ export default function Footer() {
       footerObserver.disconnect();
     };
   }, []);
+
+  const socialLinks = [
+    {
+      icon: Facebook,
+      name: "Facebook",
+      href: "https://www.facebook.com/SparkHouseLimited/",
+    },
+    {
+      icon: Linkedin,
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/sparkhouse-limited/",
+    },
+    {
+      icon: Instagram,
+      name: "Instagram",
+      href: "https://www.instagram.com/sparkhouselimited/",
+    },
+  ];
 
   return (
     <footer className="relative min-h-screen bg-white overflow-hidden">
@@ -174,19 +192,16 @@ export default function Footer() {
 
             {/* Social Links */}
             <div className="flex space-x-4">
-              {[
-                { icon: Facebook, name: "Facebook" },
-                { icon: Twitter, name: "Twitter" },
-                { icon: Linkedin, name: "LinkedIn" },
-                { icon: Instagram, name: "Instagram" },
-              ].map((social) => (
+              {socialLinks.map((social) => (
                 <a
                   key={social.name}
-                  href="#"
-                  className="group/cta p-3 bg-transparent border border-green-600/30 text-green-600 hover:border-green-600 transition-all duration-500 overflow-hidden"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-green-600/30 p-3 text-green-600 transition-colors hover:bg-green-600 hover:text-white"
+                  aria-label={social.name}
                 >
-                  <div className="absolute inset-0 bg-green-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out origin-left"></div>
-                  <social.icon className="w-4 h-4 relative z-10 group-hover:text-white transition-colors duration-700" />
+                  <social.icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
@@ -228,12 +243,9 @@ export default function Footer() {
                 <a
                   key={service}
                   href="#"
-                  className="group block text-gray-900 hover:text-green-600 transition-all duration-300 font-light"
+                  className="block border-b border-emerald-100 py-2 text-gray-900 transition-colors hover:text-emerald-600"
                 >
-                  <div className="flex items-center space-x-2">
-                    <div className="w-1 h-1 bg-green-400 rounded-full group-hover:w-2 transition-all duration-300" />
-                    <span>{service}</span>
-                  </div>
+                  {service}
                 </a>
               ))}
             </div>
@@ -274,12 +286,9 @@ export default function Footer() {
                 <a
                   key={project}
                   href="#"
-                  className="group block text-gray-900 hover:text-green-600 transition-all duration-300 font-light"
+                  className="block border-b border-emerald-100 py-2 text-gray-900 transition-colors hover:text-emerald-600"
                 >
-                  <div className="flex items-center space-x-2">
-                    <div className="w-1 h-1 bg-green-400 rounded-full group-hover:w-2 transition-all duration-300" />
-                    <span>{project}</span>
-                  </div>
+                  {project}
                 </a>
               ))}
             </div>
@@ -311,51 +320,61 @@ export default function Footer() {
 
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <div className="p-2 bg-gradient-to-br from-green-600 via-green-500 to-teal-400 rounded-lg">
-                  <MapPin className="w-4 h-4 text-white" />
+                <div className="bg-gradient-to-br from-green-600 via-green-500 to-teal-400 p-2">
+                  <MapPin className="h-4 w-4 text-white" />
                 </div>
-                <div>
-                  <p className="text-gray-900 font-light leading-relaxed">
-                    No.5 Plus Uchendu Street, NTA Road, Port Harcourt
+                <div className="text-gray-900">
+                  <p className="font-light leading-relaxed">
+                    15KM East-West Road,
+                    <br />
+                    Off Obiri-Ikwerre Flyover,
+                    <br />
+                    Port Harcourt, Nigeria
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-4">
-                <div className="p-2 bg-gradient-to-br from-teal-600 via-green-500 to-green-400 rounded-lg">
-                  <Phone className="w-4 h-4 text-white" />
+                <div className="bg-gradient-to-br from-teal-600 via-green-500 to-green-400 p-2">
+                  <Phone className="h-4 w-4 text-white" />
                 </div>
                 <a
-                  href="tel:08088035933"
-                  className="text-gray-900 hover:text-green-600 transition-colors duration-300 font-light"
+                  href="tel:09042131257"
+                  className="font-light text-gray-900 transition-colors duration-300 hover:text-green-600"
                 >
-                  08088035933
+                  09042131257
                 </a>
               </div>
 
               <div className="flex items-center space-x-4">
-                <div className="p-2 bg-gradient-to-br from-cyan-600 via-green-500 to-green-400 rounded-lg">
-                  <Mail className="w-4 h-4 text-white" />
+                <div className="bg-gradient-to-br from-cyan-600 via-green-500 to-green-400 p-2">
+                  <Mail className="h-4 w-4 text-white" />
                 </div>
                 <a
-                  href="mailto:info@SparkHouselimited.ng"
-                  className="text-gray-900 hover:text-green-600 transition-colors duration-300 font-light"
+                  href="mailto:info@sparkhouselimited.ng"
+                  className="font-light text-gray-900 transition-colors duration-300 hover:text-green-600"
                 >
-                  info@SparkHouselimited.ng
+                  info@sparkhouselimited.ng
                 </a>
+              </div>
+
+              <div className="flex items-center space-x-4">
+                <div className="bg-gradient-to-br from-emerald-600 via-green-500 to-teal-400 p-2">
+                  <Clock className="h-4 w-4 text-white" />
+                </div>
+                <p className="font-light text-gray-900">
+                  Mon–Fri: 9:00 AM – 5:00 PM
+                </p>
               </div>
             </div>
 
-            {/* CTA Button matching projects page style */}
+            {/* CTA Button */}
             <div className="pt-4">
-              <button className="group relative px-8 py-3 bg-transparent border border-green-600/30 text-green-600 font-light text-base hover:border-green-600 transition-all duration-500 overflow-hidden w-full">
-                <div className="absolute inset-0 bg-green-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out origin-left"></div>
-                <span
-                  className="relative z-10 group-hover:text-white transition-colors duration-700"
-                  style={{ fontWeight: "300", letterSpacing: "0.02em" }}
-                >
-                  Start Your Project
-                </span>
+              <button
+                className="w-full border border-green-600 px-8 py-3 text-base font-light text-green-600 transition-colors hover:bg-green-600 hover:text-white"
+                style={{ letterSpacing: "0.02em" }}
+              >
+                Start Your Project
               </button>
             </div>
           </div>

@@ -8,6 +8,7 @@ import {
   Clock,
   Linkedin,
   Instagram,
+  Facebook,
   ArrowUpRight,
   Send,
   User,
@@ -48,7 +49,11 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-white">
+    <div
+      className="relative min-h-screen border-t border-green-100/40 bg-white"
+      data-nav-section="contact"
+      id="contact"
+    >
       {/* Dynamic Aurora Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div
@@ -225,7 +230,7 @@ const ContactPage = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      placeholder="+234 808 803 5933"
+                      placeholder="0904 213 1257"
                       className="w-full px-4 py-3 bg-white/80 backdrop-blur-sm border border-green-100/50 rounded-sm focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all duration-300 text-gray-900 placeholder-gray-500"
                     />
                   </div>
@@ -312,13 +317,10 @@ const ContactPage = () => {
                   <button
                     onClick={handleSubmit}
                     type="submit"
-                    className="group relative w-full md:w-auto px-8 py-4 bg-green-600 text-white font-light text-lg hover:bg-green-700 transition-all duration-500 overflow-hidden"
+                    className="flex w-full items-center justify-center gap-3 border border-green-600 bg-green-600 px-8 py-4 text-lg font-light text-white transition-colors hover:bg-green-700 md:w-auto"
                   >
-                    <div className="absolute inset-0 bg-green-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out origin-left"></div>
-                    <span className="relative z-10 flex items-center justify-center space-x-3">
-                      <Send className="w-5 h-5" />
-                      <span>Send Message</span>
-                    </span>
+                    <Send className="w-5 h-5" />
+                    <span>Send Message</span>
                   </button>
                 </div>
               </div>
@@ -349,9 +351,12 @@ const ContactPage = () => {
                     <h3 className="text-xl font-medium text-gray-900">
                       Call Us
                     </h3>
-                    <p className="text-lg text-gray-700 font-light">
-                      08088035933
-                    </p>
+                    <a
+                      href="tel:09042131257"
+                      className="text-lg font-light text-gray-700 transition-colors hover:text-green-600"
+                    >
+                      09042131257
+                    </a>
                   </div>
                 </div>
 
@@ -364,9 +369,12 @@ const ContactPage = () => {
                     <h3 className="text-xl font-medium text-gray-900">
                       Our Email
                     </h3>
-                    <p className="text-lg text-gray-700 font-light">
-                      info@SparkHouselimited.ng
-                    </p>
+                    <a
+                      href="mailto:info@sparkhouselimited.ng"
+                      className="text-lg font-light text-gray-700 transition-colors hover:text-green-600"
+                    >
+                      info@sparkhouselimited.ng
+                    </a>
                   </div>
                 </div>
 
@@ -380,9 +388,9 @@ const ContactPage = () => {
                       Our Location
                     </h3>
                     <p className="text-lg text-gray-700 font-light leading-relaxed">
-                      No.5 Pius Uchendu Street,
+                      15KM East-West Road,
                       <br />
-                      NTA Road, Port Harcourt,
+                      Off Obiri-Ikwerre Flyover,
                       <br />
                       Port Harcourt, Nigeria
                     </p>
@@ -399,7 +407,7 @@ const ContactPage = () => {
                       Working Hours
                     </h3>
                     <p className="text-lg text-gray-700 font-light">
-                      Mon-Fri: 10AM-5PM
+                      Mon–Fri: 9:00 AM – 5:00 PM
                     </p>
                   </div>
                 </div>
@@ -413,23 +421,35 @@ const ContactPage = () => {
                   </h3>
                   <div className="flex items-center space-x-4">
                     <a
-                      href="#"
-                      className="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-300"
+                      href="https://www.linkedin.com/company/sparkhouse-limited/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-12 w-12 items-center justify-center border border-green-600 bg-green-600 text-white transition-colors hover:bg-green-700"
                     >
                       <Linkedin className="w-5 h-5" />
                     </a>
                     <a
-                      href="#"
-                      className="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-300"
+                      href="https://www.instagram.com/sparkhouselimited/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-12 w-12 items-center justify-center border border-green-600 bg-green-600 text-white transition-colors hover:bg-green-700"
                     >
                       <Instagram className="w-5 h-5" />
+                    </a>
+                    <a
+                      href="https://www.facebook.com/SparkHouseLimited/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-12 w-12 items-center justify-center border border-green-600 bg-green-600 text-white transition-colors hover:bg-green-700"
+                    >
+                      <Facebook className="w-5 h-5" />
                     </a>
                   </div>
                 </div>
               </div>
 
               {/* Call to Action */}
-              <div className="bg-gradient-to-br from-green-50/50 to-white p-8 rounded-sm border border-green-100/50">
+              <div className="bg-gradient-to-br from-green-50/50 to-white p-8 border border-green-100/50">
                 <div className="space-y-4">
                   <h3 className="text-xl font-medium text-gray-900">
                     Ready to Start?
@@ -438,12 +458,9 @@ const ContactPage = () => {
                     Let&apos;s discuss your vision and create something
                     extraordinary together.
                   </p>
-                  <button className="group relative px-6 py-3 bg-transparent border border-green-600/30 text-green-600 font-light hover:border-green-600 transition-all duration-500 overflow-hidden">
-                    <div className="absolute inset-0 bg-green-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out origin-left"></div>
-                    <span className="relative z-10 group-hover:text-white transition-colors duration-700 flex items-center space-x-2">
-                      <span>Schedule a Consultation</span>
-                      <ArrowUpRight className="w-4 h-4" />
-                    </span>
+                  <button className="flex items-center gap-2 border border-green-600 px-6 py-3 text-green-600 transition-colors hover:bg-green-600 hover:text-white">
+                    <span>Schedule a Consultation</span>
+                    <ArrowUpRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>

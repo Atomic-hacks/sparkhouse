@@ -8,6 +8,8 @@ import {
   Hotel,
   Award,
   Users,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { ProjectCard } from "../ui/project-card";
 
@@ -78,6 +80,7 @@ const testimonials = [
     author: "Sarah and John D.",
     role: "Homeowners",
     initials: "SD",
+    image: "/house2.jpg",
   },
   {
     id: 2,
@@ -86,6 +89,7 @@ const testimonials = [
     author: "Emily S.",
     role: "CEO",
     initials: "ES",
+    image: "/house6.jpg",
   },
   {
     id: 3,
@@ -94,12 +98,14 @@ const testimonials = [
     author: "Michael T.",
     role: "Project Investor",
     initials: "MT",
+    image: "/house9.jpg",
   },
 ];
 
 const Portfolio: React.FC = () => {
   const [, setHoveredProject] = useState<number | null>(null);
   const [activeSection, setActiveSection] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -107,8 +113,26 @@ const Portfolio: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 8000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const goToSlide = (index: number) => {
+    const length = testimonials.length;
+    const nextIndex = (index + length) % length;
+    setCurrentTestimonial(nextIndex);
+  };
+
   return (
-    <div className="relative min-h-screen bg-white">
+    <div
+      className="relative min-h-screen border-t border-emerald-100/40 bg-white"
+      data-nav-section="projects"
+      id="projects"
+    >
       {/* Dynamic Aurora Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div
@@ -359,59 +383,115 @@ const Portfolio: React.FC = () => {
             </div>
           </div>
 
-          {/* Testimonials Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {testimonials.map((testimonial, index) => (
+          {/* Testimonials Slider */}
+          <div className="relative">
+            <div className="overflow-hidden border border-green-100/60 bg-white/90 shadow-lg">
               <div
-                key={testimonial.id}
-                className={`group ${index === 1 ? "md:translate-y-8" : ""}`}
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{
+                  transform: `translateX(-${currentTestimonial * 100}%)`,
+                }}
               >
-                <div className="bg-white/80 backdrop-blur-sm rounded-xs p-8 md:p-10 shadow-sm border border-green-100/50 hover:shadow-xl hover:border-green-200/50 transition-all duration-500 hover:-translate-y-2">
-                  <div className="mb-6">
-                    <svg
-                      width="32"
-                      height="24"
-                      viewBox="0 0 32 24"
-                      fill="none"
-                      className="text-green-600"
-                    >
-                      <path
-                        d="M0 24V12C0 5.4 5.4 0 12 0v4C7.6 4 4 7.6 4 12v2h6v10H0zm18 0V12c0-6.6 5.4-12 12-12v4c-4.4 0-8 3.6-8 8v2h6v10H18z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </div>
-                  <blockquote className="text-base md:text-lg text-gray-900 leading-relaxed mb-8 font-light">
-                    &quot;{testimonial.quote}&quot;
-                  </blockquote>
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
-                      <span className="text-white font-medium text-sm">
-                        {testimonial.initials}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="font-medium text-gray-900">
-                        {testimonial.author}
+                {testimonials.map((testimonial) => (
+                  <article
+                    key={testimonial.id}
+                    className="flex min-w-full flex-col gap-12 p-8 md:p-10 lg:p-12"
+                    aria-roledescription="slide"
+                  >
+                    <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:items-center">
+                      <div className="space-y-6">
+                        <div className="text-green-600">
+                          <svg
+                            width="36"
+                            height="26"
+                            viewBox="0 0 32 24"
+                            fill="none"
+                            role="img"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M0 24V12C0 5.4 5.4 0 12 0v4C7.6 4 4 7.6 4 12v2h6v10H0zm18 0V12c0-6.6 5.4-12 12-12v4c-4.4 0-8 3.6-8 8v2h6v10H18z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </div>
+                        <blockquote className="text-lg leading-relaxed text-gray-900 md:text-xl">
+                          &quot;{testimonial.quote}&quot;
+                        </blockquote>
+                        <div className="flex items-center gap-4">
+                          <div className="flex h-14 w-14 items-center justify-center border border-green-500 bg-emerald-600 text-white">
+                            <span className="text-base font-semibold">
+                              {testimonial.initials}
+                            </span>
+                          </div>
+                          <div>
+                            <p className="text-base font-semibold text-gray-900">
+                              {testimonial.author}
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              {testimonial.role}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-600">
-                        {testimonial.role}
+                      <div className="relative aspect-[4/3] overflow-hidden border border-green-100/60">
+                        <img
+                          src={testimonial.image}
+                          alt={`Completed project for ${testimonial.author}`}
+                          className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-black/20" />
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </article>
+                ))}
               </div>
-            ))}
+            </div>
+
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-2">
+                {testimonials.map((testimonial, index) => (
+                  <button
+                    key={testimonial.id}
+                    type="button"
+                    onClick={() => goToSlide(index)}
+                    className={`h-2 border border-green-400 transition-colors ${
+                      currentTestimonial === index
+                        ? "w-10 bg-green-600"
+                        : "w-6 bg-white hover:bg-green-200"
+                    }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
+                    aria-pressed={currentTestimonial === index}
+                  />
+                ))}
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => goToSlide(currentTestimonial - 1)}
+                  className="inline-flex h-10 w-10 items-center justify-center border border-green-500/40 text-green-700 transition-colors hover:bg-green-50"
+                  aria-label="Previous testimonial"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => goToSlide(currentTestimonial + 1)}
+                  className="inline-flex h-10 w-10 items-center justify-center border border-green-500/40 text-green-700 transition-colors hover:bg-green-50"
+                  aria-label="Next testimonial"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Call to Action */}
           <div className="mt-20 md:mt-24 text-center">
-            <button className="group relative px-8 py-4 bg-transparent border border-green-600/30 text-green-600 font-light text-lg hover:border-green-600 transition-all duration-500 overflow-hidden">
-              <div className="absolute inset-0 bg-green-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out origin-left"></div>
-              <span className="relative z-10 group-hover:text-white transition-colors duration-700 flex items-center space-x-3">
-                <span>Start Your Project Today</span>
-                <ArrowUpRight className="w-5 h-5" />
-              </span>
+            <button className="inline-flex items-center gap-3 border border-green-600 px-8 py-4 text-lg font-light text-green-600 transition-colors hover:bg-green-600 hover:text-white">
+              <span>Start Your Project Today</span>
+              <ArrowUpRight className="w-5 h-5" />
             </button>
           </div>
         </div>

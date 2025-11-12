@@ -154,7 +154,7 @@ export default function Hero() {
   }
 
   return (
-    <main className="sticky top-0">
+    <main className="sticky top-0" data-nav-section="home">
       <div
         ref={heroRef}
         className="relative overflow-hidden"
@@ -190,7 +190,7 @@ export default function Hero() {
         {/* Dynamic Overlay - Enhanced for mobile */}
         <div
           ref={overlayRef}
-          className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 z-5"
+          className="absolute inset-0 bg-black/60 z-5"
           style={{ willChange: "opacity" }}
         />
 
@@ -210,7 +210,6 @@ export default function Hero() {
                 className="text-4xl xs:text-5xl sm:text-6xl font-extralight text-white tracking-tighter leading-none"
                 style={{
                   fontWeight: "200",
-                  textShadow: "0 4px 20px rgba(0,0,0,0.4)",
                   letterSpacing: "-0.06em",
                 }}
               >
@@ -238,7 +237,6 @@ export default function Hero() {
                   className="text-xl xs:text-2xl sm:text-3xl font-light text-white/90 leading-tight"
                   style={{
                     fontWeight: "300",
-                    textShadow: "0 2px 10px rgba(0,0,0,0.4)",
                     letterSpacing: "0.01em",
                   }}
                 >
@@ -253,18 +251,10 @@ export default function Hero() {
               {/* Subtitle */}
               <div
                 ref={subtitleRef}
-                className="mb-8 text-center px-4"
+                className="mb-8 px-4 text-center"
                 style={{ willChange: "transform, opacity" }}
               >
-                <p
-                  className="text-sm sm:text-base text-white/70 leading-relaxed font-light max-w-sm mx-auto"
-                  style={{
-                    fontWeight: "300",
-                    textShadow: "0 1px 6px rgba(0,0,0,0.4)",
-                    letterSpacing: "0.01em",
-                    lineHeight: "1.5",
-                  }}
-                >
+                <p className="mx-auto max-w-sm text-sm font-light leading-relaxed text-white/80">
                   Our goal then and now is to provide quality on time projects
                 </p>
               </div>
@@ -277,29 +267,25 @@ export default function Hero() {
               style={{ willChange: "transform" }}
             >
               <button
-                className="group px-6 py-4 bg-green-600 text-white font-medium text-sm hover:bg-green-700 transition-all duration-300 active:scale-95 shadow-lg touch-manipulation"
+                className="px-6 py-4 bg-emerald-600 text-white text-sm font-medium shadow-lg transition-colors hover:bg-emerald-700"
                 style={{
                   fontWeight: "500",
                   letterSpacing: "0.05em",
                   minHeight: "48px", // Better touch target
                 }}
               >
-                <span className="relative z-10 uppercase tracking-wider">
-                  Get Free Quote
-                </span>
+                <span className="uppercase tracking-wider">Get Free Quote</span>
               </button>
 
               <button
-                className="group px-6 py-4 border border-white/40 text-white/90 font-light text-sm hover:bg-white/5 hover:border-white/60 transition-all duration-300 active:scale-95 backdrop-blur-sm touch-manipulation"
+                className="px-6 py-4 border border-white/40 text-white/90 text-sm font-light transition-colors hover:bg-white/10"
                 style={{
                   fontWeight: "300",
                   letterSpacing: "0.05em",
                   minHeight: "48px", // Better touch target
                 }}
               >
-                <span className="relative z-10 uppercase tracking-wider">
-                  Get In Touch
-                </span>
+                <span className="uppercase tracking-wider">Get In Touch</span>
               </button>
             </div>
           </div>
@@ -310,7 +296,7 @@ export default function Hero() {
           {/* Company Name - Left Side */}
           <div
             ref={companyRef}
-            className="absolute left-8 lg:left-16 xl:left-24 top-1/2 transform -translate-y-1/2"
+            className="absolute left-8 lg:left-16 xl:left-24 top-1/2 -translate-y-1/2 transform"
             style={{
               willChange: "transform, opacity",
               transformStyle: "preserve-3d",
@@ -320,7 +306,6 @@ export default function Hero() {
               className="text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-extralight text-white tracking-tighter leading-none"
               style={{
                 fontWeight: "200",
-                textShadow: "0 4px 20px rgba(0,0,0,0.3)",
                 letterSpacing: "-0.08em",
               }}
             >
@@ -345,10 +330,9 @@ export default function Hero() {
               style={{ willChange: "transform" }}
             >
               <h2
-                className="text-2xl lg:text-3xl xl:text-4xl font-light text-white/90 mb-4 leading-tight"
+                className="text-2xl lg:text-3xl xl:text-4xl font-light text-white/90 leading-tight"
                 style={{
                   fontWeight: "300",
-                  textShadow: "0 2px 10px rgba(0,0,0,0.3)",
                   letterSpacing: "0.02em",
                 }}
               >
@@ -366,15 +350,7 @@ export default function Hero() {
               className="mb-12"
               style={{ willChange: "transform, opacity" }}
             >
-              <p
-                className="text-base lg:text-lg text-white/60 leading-relaxed font-light"
-                style={{
-                  fontWeight: "300",
-                  textShadow: "0 1px 6px rgba(0,0,0,0.3)",
-                  letterSpacing: "0.01em",
-                  lineHeight: "1.6",
-                }}
-              >
+              <p className="text-base font-light leading-relaxed text-white/75">
                 Our goal then and now is to provide quality on time projects
               </p>
             </div>
@@ -386,27 +362,23 @@ export default function Hero() {
               style={{ willChange: "transform" }}
             >
               <button
-                className="group px-8 py-3 bg-green-600 text-white font-medium text-base hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="px-8 py-3 bg-emerald-600 text-white text-base font-medium shadow-lg transition-colors hover:bg-emerald-700"
                 style={{
                   fontWeight: "500",
                   letterSpacing: "0.05em",
                 }}
               >
-                <span className="relative z-10 uppercase tracking-wider">
-                  Get Free Quote
-                </span>
+                <span className="uppercase tracking-wider">Get Free Quote</span>
               </button>
 
               <button
-                className="group px-8 py-3 border border-white/30 text-white/90 font-light text-base hover:bg-white/5 hover:border-white/50 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
+                className="px-8 py-3 border border-white/30 text-white/90 text-base font-light transition-colors hover:bg-white/10"
                 style={{
                   fontWeight: "300",
                   letterSpacing: "0.05em",
                 }}
               >
-                <span className="relative z-10 uppercase tracking-wider">
-                  Get In Touch
-                </span>
+                <span className="uppercase tracking-wider">Get In Touch</span>
               </button>
             </div>
           </div>
